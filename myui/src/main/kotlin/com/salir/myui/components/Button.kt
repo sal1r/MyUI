@@ -3,6 +3,7 @@ package com.salir.myui.components
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -23,13 +24,15 @@ import com.salir.myui.theme.typo.LocalTextStyle
 @Composable
 fun Button(
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .clip(Theme.shapes.medium)
             .background(Theme.colors.primary)
-            .clickable(onClick = onClick, indication = Indication)
+            // TODO: add indication
+            .clickable(onClick = onClick)
             .padding(horizontal = 10.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center

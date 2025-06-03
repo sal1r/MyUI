@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Notic"
+rootProject.name = "MyUI"
 include(":app")
 include(":myui")

@@ -63,6 +63,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":myui"))
+
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.core.ktx)
