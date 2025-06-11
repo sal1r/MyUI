@@ -87,7 +87,7 @@ fun TextField(
                             color = color,
                             shape = Theme.shapes.small
                         )
-                        .padding(8.dp)
+                        .padding(horizontal = 8.dp, vertical = 10.dp)
                 ) {
                     innerTextField()
                 }
