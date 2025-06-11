@@ -28,7 +28,8 @@ class BubbleIndicationNode(
             При использовании collectLatest вместо collect может быть не обработано первое
             нажатие в том случае, если мы используем перегрузку Modifier.clickable() без передачи
             своего InteractionSource. В таком случае создание IndicationNode происходит лениво
-            ПОСЛЕ того, как событие PressInteraction.Press поступит в InteractionSource.
+            ПОСЛЕ того, как будет совершён первый клик и событие PressInteraction.Press
+            поступит в InteractionSource, поэтому в collectLatest оно не поступает.
              */
             interactionSource.interactions.collect { interaction ->
                 when (interaction) {
