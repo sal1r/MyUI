@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.salir.myui.components.Button
+import com.salir.myui.components.Switch
 import com.salir.myui.components.Text
 import com.salir.myui.components.TextField
 import com.salir.myui.theme.AppTheme
@@ -31,6 +33,7 @@ fun MyPreview() {
 
     var name by remember { mutableStateOf("") }
     var applyedName by remember { mutableStateOf("") }
+    var isActive by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxWidth(0.8f),
@@ -48,9 +51,9 @@ fun MyPreview() {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Row(
-            modifier = Modifier.padding(top = 8.dp)
-        ) {
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row {
             Button(
                 modifier = Modifier.weight(1f),
                 onClick = {
@@ -62,7 +65,7 @@ fun MyPreview() {
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(12.dp))
 
             Button(
                 modifier = Modifier.weight(1f),
@@ -74,6 +77,25 @@ fun MyPreview() {
                     text = "Clear focus"
                 )
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Switch(
+                isActive = isActive
+            ) {
+                isActive = it
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Text(
+                text = "Switch that does nothing🌈",
+                textStyle = Theme.typo.title
+            )
         }
     }
 }
