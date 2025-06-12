@@ -33,8 +33,8 @@ fun Switch(
 ) {
     Box(
         modifier = Modifier
-            .border(width = 3.dp, color = Theme.colors.primary, shape = CircleShape)
-            .clip(CircleShape)
+            .border(width = 3.dp, color = Theme.colors.primary, shape = Theme.shapes.absolute)
+            .clip(Theme.shapes.absolute)
             .background(Theme.colors.container)
             .clickable(onClick = { onActiveChanged(!isActive) }, interactionSource = remember { MutableInteractionSource() }, indication = null)
             .padding(4.dp)
