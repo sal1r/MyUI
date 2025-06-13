@@ -47,7 +47,7 @@ fun CheckBox(
         modifier = Modifier
             .border(width = 2.dp, color = Theme.colors.primary, shape = Theme.shapes.small)
             .clip(Theme.shapes.small)
-            .background(Theme.colors.container)
+            .background(Theme.colors.background)
             .clickable(onClick = { onActiveChanged(!isActive) }, interactionSource = remember { MutableInteractionSource() }, indication = null)
             .padding(4.dp)
             .size(24.dp)

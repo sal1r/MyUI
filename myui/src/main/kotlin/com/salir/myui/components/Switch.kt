@@ -36,7 +36,7 @@ fun Switch(
         modifier = Modifier
             .border(width = 2.dp, color = Theme.colors.primary, shape = Theme.shapes.absolute)
             .clip(Theme.shapes.absolute)
-            .background(Theme.colors.container)
+            .background(Theme.colors.background)
             .clickable(onClick = { onActiveChanged(!isActive) }, interactionSource = remember { MutableInteractionSource() }, indication = null)
             .padding(4.dp)
             .width(48.dp)

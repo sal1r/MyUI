@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.salir.myui.components.Button
 import com.salir.myui.components.CheckBox
+import com.salir.myui.components.LoadingIndicator
 import com.salir.myui.components.Switch
 import com.salir.myui.components.Text
 import com.salir.myui.components.TextField
@@ -41,6 +42,10 @@ fun MyPreview() {
         modifier = Modifier.fillMaxWidth(0.8f),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        LoadingIndicator()
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = "Your name: $applyedName",
             textStyle = Theme.typo.title

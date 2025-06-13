@@ -1,5 +1,7 @@
 package com.salir.myui.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.InteractionSource
@@ -62,7 +64,10 @@ fun TextField(
         minLines = minLines,
         maxLines = maxLines,
         decorationBox = { innerTextField ->
-            val color = if (isFocused) Theme.colors.primary else Theme.colors.onBackground
+            val color by animateColorAsState(
+                targetValue = if (isFocused) Theme.colors.primary else Theme.colors.onBackground,
+                animationSpec = tween(150)
+            )
 
             Column {
                 label?.let { label ->
@@ -83,7 +88,7 @@ fun TextField(
                     modifier = modifier
                         .clip(Theme.shapes.small)
                         .border(
-                            width = 1.dp,
+                            width = 2.dp,
                             color = color,
                             shape = Theme.shapes.small
                         )
