@@ -1,8 +1,16 @@
 package com.salir.myui.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,45 +29,41 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.salir.myui.R
 import com.salir.myui.theme.AppTheme
 import com.salir.myui.theme.Theme
 
 @Composable
-fun Switch(
+fun CheckBox(
     isActive: Boolean,
     onActiveChanged: (Boolean) -> Unit
 ) {
     Box(
         modifier = Modifier
-            .border(width = 2.dp, color = Theme.colors.primary, shape = Theme.shapes.absolute)
-            .clip(Theme.shapes.absolute)
+            .border(width = 2.dp, color = Theme.colors.primary, shape = Theme.shapes.small)
+            .clip(Theme.shapes.small)
             .background(Theme.colors.container)
             .clickable(onClick = { onActiveChanged(!isActive) }, interactionSource = remember { MutableInteractionSource() }, indication = null)
             .padding(4.dp)
-            .width(48.dp)
+            .size(24.dp)
     ) {
-        val xOffset by animateDpAsState(targetValue = if (isActive) 24.dp else 0.dp, animationSpec = tween(150))
-        val color by animateColorAsState(if (isActive) Theme.colors.primary else Theme.colors.onBackground, animationSpec = tween(150))
-
-        Box(
-            modifier = Modifier
-                .offset {
-                    IntOffset(
-                        x = xOffset.roundToPx(),
-                        y = 0
-                    )
-                }
-                .size(24.dp),
-            contentAlignment = Alignment.Center
+        AnimatedVisibility(
+            visible = isActive,
+            enter = fadeIn(tween(150)) + scaleIn(tween(150), 0.9f),
+            exit = fadeOut(tween(150)) + scaleOut(tween(150), 0.9f),
         ) {
-            Box(
+            Image(
+                painter = painterResource(R.drawable.ic_check),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(Theme.colors.primary),
                 modifier = Modifier
-                    .size(20.dp)
-                    .clip(Theme.shapes.absolute)
-                    .background(color)
+                    .size(24.dp)
+                    .align(Alignment.Center)
             )
         }
     }
@@ -68,10 +72,10 @@ fun Switch(
 
 @Preview
 @Composable
-private fun SwitchPreview() {
+private fun CheckBoxPreview() {
     var isActive by remember { mutableStateOf(false) }
     AppTheme {
-        Switch(
+        CheckBox(
             isActive = isActive,
             onActiveChanged = { isActive = it }
         )

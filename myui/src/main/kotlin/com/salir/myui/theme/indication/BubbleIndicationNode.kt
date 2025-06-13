@@ -19,7 +19,7 @@ class BubbleIndicationNode(
     private var pressPosition: Offset = Offset.Zero
     private val animatedScale = Animatable(0.1f)
     private val animatedAlpha = Animatable(0.5f)
-    private val animationSpec = tween<Float>(1000)
+    private val animationSpec = tween<Float>(800)
 
 
     override fun onAttach() {
