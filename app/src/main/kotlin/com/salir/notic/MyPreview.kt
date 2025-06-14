@@ -1,5 +1,7 @@
 package com.salir.notic
 
+import android.transition.Slide
+import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -23,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.salir.myui.components.Button
 import com.salir.myui.components.CheckBox
 import com.salir.myui.components.LoadingIndicator
+import com.salir.myui.components.Slider
 import com.salir.myui.components.Switch
 import com.salir.myui.components.Text
 import com.salir.myui.components.TextField
@@ -123,6 +127,31 @@ fun MyPreview() {
                 textStyle = Theme.typo.title
             )
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        var progress by remember { mutableFloatStateOf(30f) }
+
+        Row {
+            Text(
+                text = "Progress:"
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text(
+                text = "%.2f / 100".format(progress)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Slider(
+            progress = progress,
+            onProgressChanged = { progress = it },
+            range = 0f..100f,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

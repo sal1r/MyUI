@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.salir.myui.theme.AppTheme
 import com.salir.myui.theme.Theme
+import com.salir.myui.theme.colors.disabled
 
 @Composable
 fun Switch(
@@ -42,7 +43,7 @@ fun Switch(
             .width(48.dp)
     ) {
         val xOffset by animateDpAsState(targetValue = if (isActive) 24.dp else 0.dp, animationSpec = tween(150))
-        val color by animateColorAsState(if (isActive) Theme.colors.primary else Theme.colors.onBackground, animationSpec = tween(150))
+        val color by animateColorAsState(if (isActive) Theme.colors.primary else Theme.colors.onBackground.disabled, animationSpec = tween(150))
 
         Box(
             modifier = Modifier

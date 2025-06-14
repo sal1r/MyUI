@@ -35,8 +35,7 @@ fun Button(
         modifier = modifier
             .clip(Theme.shapes.medium)
             .background(Theme.colors.primary)
-            // TODO: add indication
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick, interactionSource = interactionSource, indication = LocalIndication.current)
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center

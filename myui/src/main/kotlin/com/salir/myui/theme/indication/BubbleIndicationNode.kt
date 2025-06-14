@@ -4,6 +4,8 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.pager.PageSize.Fill.calculateMainAxisPageSize
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -16,7 +18,7 @@ import kotlin.math.max
 class BubbleIndicationNode(
     private val interactionSource: InteractionSource
 ): Modifier.Node(), DrawModifierNode {
-    private var pressPosition: Offset = Offset.Zero
+    private var pressPosition = mutableStateOf<Offset?>(null)
     private val animatedScale = Animatable(0.1f)
     private val animatedAlpha = Animatable(0.5f)
     private val animationSpec = tween<Float>(800)
@@ -34,7 +36,7 @@ class BubbleIndicationNode(
             interactionSource.interactions.collect { interaction ->
                 when (interaction) {
                     is PressInteraction.Press -> {
-                        pressPosition = interaction.pressPosition
+                        pressPosition.value = interaction.pressPosition
 
                         animatedAlpha.snapTo(0.5f)
                         animatedScale.snapTo(0.1f)
@@ -55,11 +57,13 @@ class BubbleIndicationNode(
 
     override fun ContentDrawScope.draw() {
         drawContent()
-        drawCircle(
-            color = Color(0xFF000000),
-            center = pressPosition,
-            radius = max(size.width, size.height) * animatedScale.value,
-            alpha = animatedAlpha.value
-        )
+        pressPosition.value?.let { position ->
+            drawCircle(
+                color = Color(0xFF000000),
+                center = position,
+                radius = max(size.width, size.height) * animatedScale.value,
+                alpha = animatedAlpha.value
+            )
+        }
     }
 }

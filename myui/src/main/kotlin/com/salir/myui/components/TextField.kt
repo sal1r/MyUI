@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.salir.myui.theme.AppTheme
 import com.salir.myui.theme.Theme
 import com.salir.myui.theme.colors.LocalContentColor
+import com.salir.myui.theme.colors.disabled
 import com.salir.myui.theme.typo.LocalTextStyle
 
 @Composable
@@ -64,8 +65,12 @@ fun TextField(
         minLines = minLines,
         maxLines = maxLines,
         decorationBox = { innerTextField ->
-            val color by animateColorAsState(
+            val labelColor by animateColorAsState(
                 targetValue = if (isFocused) Theme.colors.primary else Theme.colors.onBackground,
+                animationSpec = tween(150)
+            )
+            val outlineColor by animateColorAsState(
+                targetValue = if (isFocused) Theme.colors.primary else Theme.colors.onBackground.disabled,
                 animationSpec = tween(150)
             )
 
@@ -76,7 +81,7 @@ fun TextField(
                     ) {
                         CompositionLocalProvider(
                             LocalTextStyle provides Theme.typo.label,
-                            LocalContentColor provides color
+                            LocalContentColor provides labelColor
                         ) {
                             label.invoke()
                         }
@@ -89,7 +94,7 @@ fun TextField(
                         .clip(Theme.shapes.small)
                         .border(
                             width = 2.dp,
-                            color = color,
+                            color = outlineColor,
                             shape = Theme.shapes.small
                         )
                         .padding(horizontal = 8.dp, vertical = 10.dp)
