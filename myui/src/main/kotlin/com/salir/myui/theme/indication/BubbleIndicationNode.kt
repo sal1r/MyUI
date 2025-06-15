@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.node.DrawModifierNode
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,13 +58,15 @@ class BubbleIndicationNode(
 
     override fun ContentDrawScope.draw() {
         drawContent()
-        pressPosition.value?.let { position ->
-            drawCircle(
-                color = Color(0xFF000000),
-                center = position,
-                radius = max(size.width, size.height) * animatedScale.value,
-                alpha = animatedAlpha.value
-            )
+        clipRect {
+            pressPosition.value?.let { position ->
+                drawCircle(
+                    color = Color(0xFF000000),
+                    center = position,
+                    radius = max(size.width, size.height) * animatedScale.value,
+                    alpha = animatedAlpha.value
+                )
+            }
         }
     }
 }
